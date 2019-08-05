@@ -9,9 +9,10 @@ export default class HomePage extends React.Component{
     }
 
     render(){
+        
         return(
             <div>
-                Footer
+                <h2>{this.props.data}</h2>
             </div>
         )
     }

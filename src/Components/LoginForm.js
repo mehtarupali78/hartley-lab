@@ -4,14 +4,16 @@ import { Link } from "react-router-dom";
 import {userService} from "../Services/userService";
 import swal from 'sweetalert';
 import { history } from '../utilities/history';
+import {welcomeDataAction} from '../Redux/actions/welcomeDataAction';
+import { connect } from "react-redux";
 
-export default class LoginForm extends React.Component{
+export  class LoginForm extends React.Component{
      constructor(props){
          super(props)
          this.state={
-            isFlag:false
+            
          }
-         console.log("login form")
+        
      }
 
      validate=(values) => {
@@ -31,7 +33,7 @@ export default class LoginForm extends React.Component{
       }
 
      handlesubmit= (values, { setSubmitting }) => {
-        console.log("hadle submit",values);
+       
         let data={
           email:values.email,
           password:values.password
@@ -40,19 +42,19 @@ export default class LoginForm extends React.Component{
           .then(data=>{
              swal("sucess!", "login sucess.", "success");
              history.push("/home");
-             //window.location.reload();
+             this.props.dispatch(welcomeDataAction.getWelcomeData())
+              window.location.reload();
+            
           },error=>{
              swal("wrong!", "mail id and password is wrong", "error");
           })
 
       }
-
-     
        
 
      render(){
         
-       console.log("this",this.state.isFlag);
+       
          return(
             <div class="wrapper fadeInDown">
             <div id="formContent">
@@ -92,3 +94,15 @@ export default class LoginForm extends React.Component{
      }
 }
 
+function mapStatetoProps(state){
+  const {welcomedata}=state.welcomeData;
+  console.log("redux",state)
+ return{
+   welcomedata
+ }
+}
+
+
+
+
+export default connect(mapStatetoProps, null)(LoginForm);

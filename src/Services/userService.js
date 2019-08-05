@@ -11,6 +11,7 @@ function login(data){
    return new Promise((resolve,reject)=>{
        axios.post(server+"/api/login",data)
        .then(data=>{
+           localStorage.setItem('user',data.data.token);
            resolve(data.data)
        },err=>{
           reject(err)
@@ -29,3 +30,4 @@ function registration(data){
         })
     })
  }
+

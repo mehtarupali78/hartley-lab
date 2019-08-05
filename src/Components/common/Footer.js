@@ -4,9 +4,9 @@ import React from "react"
 
 export default function Footer(props) {
     return (
-      <h1>
+      <footer>
        Footer
-      </h1>
+      </footer>
     )
   }
 
